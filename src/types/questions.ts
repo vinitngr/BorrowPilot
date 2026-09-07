@@ -39,6 +39,7 @@ export const baseQuestions: Question[] = [
   },
   {
     id: 'requestedAmount', title: 'How much are you considering borrowing?', kind: 'currency', required: true,
+    helpText: 'Enter the total one-time loan amount you are considering.',
     affects: ['verdict', 'amount', 'emi', 'rate'], min: 10000, step: 1000, parse: numberValue,
   },
   {
@@ -69,10 +70,12 @@ export const baseQuestions: Question[] = [
   },
   {
     id: 'age', title: 'How old are you?', kind: 'number', required: true,
+    helpText: 'Enter your age in completed years.',
     affects: ['amount', 'confidence'], min: 18, max: 65, step: 1, parse: numberValue,
   },
   {
-    id: 'dependents', title: 'How many people depend on your income?', kind: 'number', required: true,
+    id: 'dependents', title: 'How many people currently rely on your income?', kind: 'number', required: true,
+    helpText: 'Count children, partner, parents, or anyone else whose essential costs you regularly cover. Enter a number of people, not a rupee amount.',
     affects: ['verdict', 'amount', 'emi'], min: 0, max: 15, step: 1, parse: numberValue,
   },
   {
@@ -85,6 +88,7 @@ export const baseQuestions: Question[] = [
 export const followUpQuestions: Question[] = [
   {
     id: 'incomeYears', title: 'How long have you had this income source?', kind: 'number', required: true,
+    helpText: 'Enter the number of completed years.',
     affects: ['confidence', 'amount', 'rate'], min: 0, max: 50, step: 1, parse: numberValue,
     showWhen: answers => answers.incomeType !== undefined,
   },

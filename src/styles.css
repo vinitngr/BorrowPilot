@@ -295,3 +295,59 @@ h1 { margin: 0; max-width: 690px; font-size: clamp(3.25rem, 6.2vw, 6.6rem); font
   .home-actions > * { width: 100%; }
   .home-actions button { justify-content: center; }
 }
+
+/* Phone-only layout corrections. Desktop stays unchanged above this breakpoint. */
+@media (max-width: 600px) {
+  .app-header { padding-left: 15px; padding-right: 15px; }
+  .brand img { width: 128px; }
+  .app-main { min-width: 0; padding: 18px 12px 24px; }
+  .form-shell, .dashboard-shell { width: 100%; min-width: 0; }
+  .form-head h2, .dashboard-head h2 { font-size: 25px; line-height: 1.05; overflow-wrap: anywhere; }
+  .form-head p, .dashboard-head p { font-size: 11px; }
+  .example-badges { gap: 5px; }
+  .example-badges button { padding: 5px 7px; font-size: 9px; }
+  .form-card { padding: 15px; }
+  .form-section + .form-section { margin-top: 18px; padding-top: 17px; }
+  .form-section > p { margin-bottom: 12px; }
+  .field label { line-height: 1.35; }
+  .field-help { max-width: 100%; overflow-wrap: anywhere; }
+  .form-actions { flex-direction: column; align-items: stretch; gap: 11px; }
+  .form-actions .hero-footnote { justify-content: center; }
+  .form-actions .button, .form-actions button { width: 100%; white-space: normal; }
+  .dashboard-head .header-actions { display: flex; flex-wrap: wrap; gap: 7px; }
+  .confidence-chip { max-width: 100%; overflow-wrap: anywhere; }
+  .dashboard-head .header-actions button { margin-left: auto; }
+  .dash-card { padding: 14px; }
+  .verdict-card, .safe-card { min-height: 0; }
+  .verdict-main h1 { font-size: 32px; }
+  .verdict-copy { max-width: none; font-size: 11px; }
+  .safe-card .big-value { margin-top: 20px; font-size: 35px; }
+  .metric-card { grid-column: span 12; min-height: 0; }
+  .metric-card .metric-label { margin-top: 10px; }
+  .metric-card .metric-value { font-size: 23px; }
+  .dash-card h3 { font-size: 16px; line-height: 1.15; overflow-wrap: anywhere; }
+  .card-head { min-width: 0; }
+  .card-head > div { min-width: 0; }
+  .card-note { overflow-wrap: anywhere; }
+  .comparison-labels { align-items: flex-start; flex-wrap: wrap; gap: 4px 10px; line-height: 1.35; }
+  .comparison-labels > * { max-width: 100%; overflow-wrap: anywhere; }
+  .tradeoff-list { gap: 5px; }
+  .tradeoff { min-width: 0; padding: 8px 6px; }
+  .tradeoff strong { font-size: 11px; overflow-wrap: anywhere; }
+  .tradeoff small, .tradeoff span { font-size: 8px; }
+  .comparison-legend { flex-wrap: wrap; gap: 8px 14px; }
+  .stress-box { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .stress-box p { max-width: none; text-align: left; }
+  .signal-grid { gap: 14px; }
+  .signal-grid li { overflow-wrap: anywhere; }
+  .negotiation-card .card-head { gap: 14px; }
+  .negotiation-card .card-head button { width: 100%; }
+  .negotiation-grid { gap: 6px; }
+  .negotiation-item { min-width: 0; padding: 8px; }
+  .negotiation-item strong { font-size: 11px; overflow-wrap: anywhere; }
+  .bar-label { gap: 7px; }
+  .bar-label span, .bar-label strong { min-width: 0; overflow-wrap: anywhere; }
+  .chart-row { gap: 10px; }
+  .stress-compare-grid { gap: 16px; }
+  .chart-legend { flex-wrap: wrap; gap: 8px 13px; }
+}
