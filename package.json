@@ -13,12 +13,9 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
-    "clsx": "latest",
     "lucide-react": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "recharts": "latest",
-    "tailwind-merge": "latest",
     "tailwindcss": "latest",
     "typescript": "latest",
     "vite": "latest"
