@@ -157,6 +157,8 @@ h1 { margin: 0; max-width: 690px; font-size: clamp(3.25rem, 6.2vw, 6.6rem); font
 
 .dashboard-head { align-items: center; }
 .dashboard-head .header-actions { display: flex; align-items: center; gap: 10px; }
+.save-report-button { min-height: 30px; height: 30px; padding: 0 11px; font-size: 10px; box-shadow: 0 4px 12px rgba(40, 100, 215, .18); }
+.save-report-button:hover { box-shadow: 0 6px 16px rgba(40, 100, 215, .24); }
 .confidence-chip { border: 1px solid #cbd9f5; background: var(--blue-soft); color: var(--blue-dark); padding: 7px 9px; font-size: 10px; font-weight: 600; }
 .dashboard-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 12px; }
 .dash-card { min-width: 0; padding: 17px; }
@@ -274,6 +276,28 @@ h1 { margin: 0; max-width: 690px; font-size: clamp(3.25rem, 6.2vw, 6.6rem); font
   .signal-grid, .negotiation-grid { grid-template-columns: 1fr 1fr; }
   .stress-compare-grid { grid-template-columns: 1fr; gap: 20px; }
   .negotiation-card .card-head { display: block; }
+}
+
+@media print {
+  @page { size: A4; margin: 12mm; }
+  html, body, #root { min-height: auto; background: #fff; }
+  body { overflow: visible; }
+  .app-shell { display: block; height: auto; min-height: auto; overflow: visible; background: #fff; }
+  .app-header { max-width: none; padding: 0 0 14px; }
+  .app-header .brand img { width: 150px; }
+  .header-meta, .app-footer, .header-actions button, .negotiation-card button, .adjust-and-compare { display: none !important; }
+  .app-main { max-width: none; padding: 0; overflow: visible; }
+  .dashboard-shell { max-width: none; }
+  .dash-card { break-inside: avoid; }
+  .chart-row, .stress-chart-wide, .negotiation-card { break-inside: avoid; }
+  .comparison-track, .bar-track, .stress-track { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .print-footer { position: fixed; right: 0; bottom: -5mm; left: 0; display: block; color: #9ba4af; font-size: 8px; text-align: center; letter-spacing: .04em; }
+  .print-footer::after { content: ' · Page ' counter(page); }
+}
+
+@media screen {
+  .print-footer { display: none; }
 }
 
 @media (max-width: 900px) {
