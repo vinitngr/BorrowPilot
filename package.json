@@ -13,20 +13,21 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
-    "vite": "latest",
-    "typescript": "latest",
+    "clsx": "latest",
+    "lucide-react": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "lucide-react": "latest",
     "recharts": "latest",
+    "tailwind-merge": "latest",
     "tailwindcss": "latest",
-    "clsx": "latest",
-    "tailwind-merge": "latest"
+    "typescript": "latest",
+    "vite": "latest"
   },
   "devDependencies": {
-    "vitest": "latest",
-    "jsdom": "latest",
+    "@tailwindcss/vite": "^4.3.3",
     "@types/react": "latest",
-    "@types/react-dom": "latest"
+    "@types/react-dom": "latest",
+    "jsdom": "latest",
+    "vitest": "latest"
   }
 }
