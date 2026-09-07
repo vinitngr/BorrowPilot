@@ -34,11 +34,11 @@ function confidence(profile: BorrowerProfile): { score: number; level: Confidenc
   return { score: Math.max(0, Math.min(100, score)), level }
 }
 
-function chooseVerdict(profile: BorrowerProfile, safeAmount: number, safeEmiValue: number, stressEmi: number): { verdict: Verdict; explanation: string } {
+function chooseVerdict(profile: BorrowerProfile, safeAmount: number, safeEmiValue: number, stressEmi: number, requestedEmi: number): { verdict: Verdict; explanation: string } {
   if (safeEmiValue <= 0 || profile.recentRepaymentStress === true && profile.existingEmis >= averageIncome(profile) * 0.35) {
     return { verdict: 'dont-borrow', explanation: 'Your current obligations leave too little resilient monthly capacity for a new repayment.' }
   }
-  if (profile.requestedAmount > safeAmount * 1.15 || stressEmi < safeEmiValue * 0.75) {
+  if (profile.requestedAmount > safeAmount * 1.15 || requestedEmi > safeEmiValue || requestedEmi > stressEmi) {
     return { verdict: 'borrow-less', explanation: 'A smaller loan keeps the repayment closer to what your budget can safely absorb, including a stress scenario.' }
   }
   return { verdict: 'borrow', explanation: 'The requested borrowing fits within the current affordability and repayment-resilience checks.' }
@@ -51,7 +51,8 @@ export function evaluateBorrower(profile: BorrowerProfile): BorrowerResult {
   const safeAmount = safePrincipal(profile, rate.annualRate.max, tenure)
   const safeEmiValue = safeEmi(profile)
   const stressEmi = stressSafeEmi(profile)
-  const decision = chooseVerdict(profile, safeAmount, safeEmiValue, stressEmi)
+  const requestedEmi = calculateEmi(profile.requestedAmount, rate.annualRate.max, tenure)
+  const decision = chooseVerdict(profile, safeAmount, safeEmiValue, stressEmi, requestedEmi)
   const confidenceResult = confidence(profile)
   const sanctionSpread = confidenceResult.level === 'high' ? 0.08 : confidenceResult.level === 'medium' ? 0.15 : 0.25
   const safeSpread = confidenceResult.level === 'high' ? 0.08 : confidenceResult.level === 'medium' ? 0.12 : 0.2
@@ -91,7 +92,7 @@ export function evaluateBorrower(profile: BorrowerProfile): BorrowerResult {
     positiveFactors,
     riskFactors,
     productRecommendation: profile.propertyValue && profile.propertyEncumbered === false && profile.incomeType === 'self-employed' ? 'secured-business-loan' : profile.loanProduct,
-    stressScenario: { label: 'Income falls by 20%', monthlyIncome: round(stressIncome(profile)), safeEmi: round(stressEmi), remainingAfterEmi: round(stressIncome(profile) - profile.existingEmis - stressEmi), passes: stressEmi >= safeEmiValue * 0.75 },
+    stressScenario: { label: 'Income falls by 20%', monthlyIncome: round(stressIncome(profile)), safeEmi: round(stressEmi), remainingAfterEmi: round(stressIncome(profile) - profile.existingEmis - requestedEmi), passes: requestedEmi <= stressEmi },
     tenureTradeoffs,
     reasons,
   }
