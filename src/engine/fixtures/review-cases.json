@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Stable salaried personal need",
+    "loanPurpose": "personal", "loanProduct": "personal-loan", "requestedAmount": 300000,
+    "monthlyIncomeMin": 70000, "monthlyIncomeMax": 70000, "incomeType": "salaried", "existingEmis": 0,
+    "essentialExpenses": 35000, "age": 28, "creditScore": 780, "dependents": 1,
+    "emergencySavingsMonths": 6, "recentRepaymentStress": false, "incomeYears": 5,
+    "incomeVolatility": "low", "documentedIncome": true, "propertyValue": null, "propertyEncumbered": null
+  },
+  {
+    "name": "Priya-like salaried borrower",
+    "loanPurpose": "personal", "loanProduct": "personal-loan", "requestedAmount": 900000,
+    "monthlyIncomeMin": 80000, "monthlyIncomeMax": 80000, "incomeType": "salaried", "existingEmis": 10000,
+    "essentialExpenses": 40000, "age": 31, "creditScore": 760, "dependents": 2,
+    "emergencySavingsMonths": 4, "recentRepaymentStress": false, "incomeYears": 6,
+    "incomeVolatility": "low", "documentedIncome": true, "propertyValue": null, "propertyEncumbered": null
+  },
+  {
+    "name": "Ravi-like secured business borrower",
+    "loanPurpose": "business", "loanProduct": "secured-business-loan", "requestedAmount": 2500000,
+    "monthlyIncomeMin": 120000, "monthlyIncomeMax": 180000, "incomeType": "self-employed", "existingEmis": 20000,
+    "essentialExpenses": 55000, "age": 38, "creditScore": 735, "dependents": 3,
+    "emergencySavingsMonths": 5, "recentRepaymentStress": false, "incomeYears": 9,
+    "incomeVolatility": "medium", "documentedIncome": true, "propertyValue": 5000000, "propertyEncumbered": false
+  },
+  {
+    "name": "Anita-like stressed gig borrower",
+    "loanPurpose": "vehicle", "loanProduct": "vehicle-loan", "requestedAmount": 150000,
+    "monthlyIncomeMin": 45000, "monthlyIncomeMax": 45000, "incomeType": "informal", "existingEmis": 20000,
+    "essentialExpenses": 22000, "age": 29, "creditScore": null, "dependents": 2,
+    "emergencySavingsMonths": 0, "recentRepaymentStress": true, "incomeYears": 2,
+    "incomeVolatility": "high", "documentedIncome": false, "propertyValue": null, "propertyEncumbered": null
+  },
+  {
+    "name": "Low income with no current debt",
+    "loanPurpose": "vehicle", "loanProduct": "vehicle-loan", "requestedAmount": 100000,
+    "monthlyIncomeMin": 25000, "monthlyIncomeMax": 25000, "incomeType": "salaried", "existingEmis": 0,
+    "essentialExpenses": 15000, "age": 24, "creditScore": null, "dependents": 1,
+    "emergencySavingsMonths": 0, "recentRepaymentStress": false, "incomeYears": 1,
+    "incomeVolatility": "low", "documentedIncome": true, "propertyValue": null, "propertyEncumbered": null
+  },
+  {
+    "name": "High existing debt without recent delinquency",
+    "loanPurpose": "personal", "loanProduct": "personal-loan", "requestedAmount": 200000,
+    "monthlyIncomeMin": 60000, "monthlyIncomeMax": 60000, "incomeType": "salaried", "existingEmis": 22000,
+    "essentialExpenses": 25000, "age": 35, "creditScore": 720, "dependents": 2,
+    "emergencySavingsMonths": 3, "recentRepaymentStress": false, "incomeYears": 8,
+    "incomeVolatility": "low", "documentedIncome": true, "propertyValue": null, "propertyEncumbered": null
+  },
+  {
+    "name": "Wide income range self-employed",
+    "loanPurpose": "business", "loanProduct": "secured-business-loan", "requestedAmount": 600000,
+    "monthlyIncomeMin": 50000, "monthlyIncomeMax": 150000, "incomeType": "self-employed", "existingEmis": 5000,
+    "essentialExpenses": 30000, "age": 42, "creditScore": null, "dependents": 2,
+    "emergencySavingsMonths": 2, "recentRepaymentStress": false, "incomeYears": 4,
+    "incomeVolatility": "high", "documentedIncome": false, "propertyValue": 0, "propertyEncumbered": null
+  },
+  {
+    "name": "Near-retirement short-tenure borrower",
+    "loanPurpose": "personal", "loanProduct": "personal-loan", "requestedAmount": 100000,
+    "monthlyIncomeMin": 100000, "monthlyIncomeMax": 100000, "incomeType": "salaried", "existingEmis": 0,
+    "essentialExpenses": 40000, "age": 64, "creditScore": 760, "dependents": 1,
+    "emergencySavingsMonths": 8, "recentRepaymentStress": false, "incomeYears": 20,
+    "incomeVolatility": "low", "documentedIncome": true, "propertyValue": null, "propertyEncumbered": null
+  },
+  {
+    "name": "Encumbered property business borrower",
+    "loanPurpose": "business", "loanProduct": "secured-business-loan", "requestedAmount": 1000000,
+    "monthlyIncomeMin": 100000, "monthlyIncomeMax": 120000, "incomeType": "self-employed", "existingEmis": 10000,
+    "essentialExpenses": 40000, "age": 40, "creditScore": 690, "dependents": 2,
+    "emergencySavingsMonths": 4, "recentRepaymentStress": false, "incomeYears": 7,
+    "incomeVolatility": "medium", "documentedIncome": true, "propertyValue": 5000000, "propertyEncumbered": true
+  },
+  {
+    "name": "No income edge case",
+    "loanPurpose": "personal", "loanProduct": "personal-loan", "requestedAmount": 50000,
+    "monthlyIncomeMin": 0, "monthlyIncomeMax": 0, "incomeType": "informal", "existingEmis": 0,
+    "essentialExpenses": 0, "age": 30, "creditScore": null, "dependents": 0,
+    "emergencySavingsMonths": null, "recentRepaymentStress": null, "incomeYears": null,
+    "incomeVolatility": null, "documentedIncome": null, "propertyValue": null, "propertyEncumbered": null
+  }
+]
