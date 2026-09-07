@@ -47,6 +47,7 @@ The same engine is reused when the borrower changes important values; calculatio
 - The initial questionnaire is compact. Follow-up questions are routed by income type and purpose, and each follow-up declares which output it affects.
 - The verdict can be Borrow, Borrow less, or Don't borrow. Recent repayment stress and insufficient resilient capacity can produce the last result.
 - Processing fees are modeled into an estimated APR, with assumptions shown in `RULES.md`.
+- The interface supports INR, USD, GBP, AED, and SGD display/input units through a fixed prototype conversion table. The engine remains calibrated to Indian INR lending assumptions; rates are not live FX quotes.
 
 ## Limitations
 

@@ -6,11 +6,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function Button({ className, variant = 'primary', ...props }: ButtonProps) {
+  const { type = 'button', ...buttonProps } = props
   return <button className={cn(
-    'inline-flex min-h-11 items-center justify-center rounded-full px-5 text-sm font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#27665c] disabled:cursor-not-allowed disabled:opacity-50',
-    variant === 'primary' && 'bg-[#1f5148] text-white shadow-sm hover:bg-[#173e37]',
-    variant === 'secondary' && 'border border-[#c8d5cf] bg-white text-[#1f5148] hover:bg-[#eef4f0]',
-    variant === 'ghost' && 'text-[#55716a] hover:bg-[#e7efea]',
+    'inline-flex min-h-10 items-center justify-center gap-2 rounded-[5px] px-4 text-xs font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2864d7] disabled:cursor-not-allowed disabled:opacity-50',
+    variant === 'primary' && 'bg-[#2864d7] text-white shadow-sm hover:bg-[#16479f]',
+    variant === 'secondary' && 'border border-[#cbd9f5] bg-white text-[#1c438d] hover:bg-[#eaf1ff]',
+    variant === 'ghost' && 'text-[#6e7885] hover:bg-[#edf0f4]',
     className,
-  )} {...props} />
+  )} type={type} {...buttonProps} />
 }
