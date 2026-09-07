@@ -51,3 +51,7 @@ The same engine is reused when the borrower changes important values; calculatio
 ## Limitations
 
 The thresholds are transparent judgement-based defaults, not lender policies. They need calibration against validated portfolio data before production use. The product does not verify income, property ownership, credit history, fees, or lender terms.
+
+## Improvement roadmap
+
+See [`docs/feature-backlog.md`](docs/feature-backlog.md) for the one-checkpoint-at-a-time engine, question-flow, and decision-visualization roadmap.
