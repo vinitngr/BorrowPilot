@@ -9,11 +9,3 @@
 ## Why the rules work this way
 
 FOIR-style lender capacity is useful for estimating eligibility, but it is not a safety recommendation. The safe estimate subtracts essential expenses, existing debt, dependents, and resilience adjustments. Uncertainty widens ranges and lowers confidence so the UI does not create false precision.
-
-## Next improvements
-
-Calibrate thresholds against repayment data, add lender-specific policies behind a versioned interface, improve tax-aware self-employed income normalisation, and allow borrowers to export/save their Negotiation Card.
-
-## What I would remove or simplify
-
-I would remove any chart that does not change a decision, keep the initial question set compact, and avoid pretending that illustrative rate floors are current lender quotes.

@@ -1,6 +1,6 @@
-# Borrower Copilot rules
+# BorrowPilot rules
 
-These are explainable defaults for a take-home assignment, not claims about a specific lender.
+These are explainable, INR-calibrated defaults for a take-home assignment. They are not claims about a specific lender or a credit decision.
 
 | Rule | Value / threshold | Why | Source |
 | --- | --- | --- | --- |
@@ -30,3 +30,9 @@ These are illustrative annual starting rates before profile adjustments:
 - Gold loan: 10%
 
 Actual lender pricing varies significantly. The interface should present these as estimated fair bands, never as offers.
+
+## Interpretation
+
+- `Likely sanction` is an eligibility-style estimate using lender-style FOIR assumptions.
+- `Safe borrowing` is the more conservative borrower-facing limit after expenses, existing EMIs, dependents, income resilience, and stress testing.
+- Lower confidence means the inputs are incomplete or uncertain; it does not mean the borrower has poor credit.

@@ -1,4 +1,4 @@
-# Borrower Copilot differentiation backlog
+# BorrowPilot differentiation backlog
 
 This backlog is intentionally ordered for one-at-a-time implementation. Each item should produce one focused commit, its own tests where applicable, and a before/after review of the borrower case matrix.
 
