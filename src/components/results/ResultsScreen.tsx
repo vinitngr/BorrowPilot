@@ -1,4 +1,5 @@
-import { ArrowLeft, Copy, Info, ShieldCheck } from 'lucide-react'
+import { useState } from 'react'
+import { ArrowLeft, Check, Copy, Info, ShieldCheck } from 'lucide-react'
 import type { BorrowerProfile } from '../../types/borrower'
 import type { BorrowerResult } from '../../types/results'
 import { Button } from '../ui/button'
@@ -14,8 +15,19 @@ const verdictCopy = {
 } as const
 
 export function ResultsScreen({ profile, result, currency, onBack, onAmountChange }: ResultsScreenProps) {
+  const [copied, setCopied] = useState(false)
   const verdict = verdictCopy[result.verdict]
   const safeRatio = result.likelySanction.amount.max ? Math.min(100, result.safeBorrowing.amount.max / result.likelySanction.amount.max * 100) : 0
+  const negotiationSummary = `BorrowPilot assessment\nVerdict: ${verdict.label}\nFair annual rate: ${formatPercent(result.rate.annualRate.min)}–${formatPercent(result.rate.annualRate.max)}\nSafe amount: ${formatAmount(result.recommendedAmount.max, currency)}\nMaximum recommended EMI: ${formatAmount(result.recommendedEmi.max, currency)}\nLikely lender sanction: ${formatAmount(result.likelySanction.amount.max, currency)}`
+  const copySummary = async () => {
+    try {
+      await navigator.clipboard.writeText(negotiationSummary)
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 1800)
+    } catch {
+      setCopied(false)
+    }
+  }
   return (
     <div className="dashboard-shell">
       <div className="dashboard-head">
@@ -40,7 +52,7 @@ export function ResultsScreen({ profile, result, currency, onBack, onAmountChang
 
         <section className="dash-card medium-card"><CardTitle kicker="Adjust and compare" title="Try another amount" note="The result updates without repeating your answers." /><label className="field" style={{ display: 'block', marginTop: 17 }}><span className="field-help" style={{ display: 'block', marginBottom: 7 }}>Loan amount considered</span><div className="field-prefix"><span>{currency}</span><input className="field-control" type="number" min={0} step={1000} value={Math.round(fromInr(profile.requestedAmount, currency))} onChange={event => onAmountChange(Number(event.target.value))} /></div></label><div className="card-note" style={{ marginTop: 13 }}>Product route: {productLabel(result.productRecommendation)} · fixed INR-calibrated rules, displayed in {currency}</div></section>
 
-        <section className="dash-card negotiation-card"><div className="card-head"><div><span className="card-kicker" style={{ color: '#2864d7' }}>Negotiation card</span><h3>Take these numbers to the lender.</h3><p className="card-note">Compare the quote against your fair range and ask what is driving the difference.</p></div><Button variant="secondary"><Copy size={13} /> Copy summary</Button></div><div className="negotiation-grid"><NegotiationItem label="Verdict" value={verdict.label} /><NegotiationItem label="Fair rate" value={`${formatPercent(result.rate.annualRate.min)}–${formatPercent(result.rate.annualRate.max)}`} /><NegotiationItem label="Safe amount" value={formatAmount(result.recommendedAmount.max, currency)} /><NegotiationItem label="Max EMI" value={formatAmount(result.recommendedEmi.max, currency)} /></div></section>
+        <section className="dash-card negotiation-card"><div className="card-head"><div><span className="card-kicker" style={{ color: '#2864d7' }}>Negotiation card</span><h3>Take these numbers to the lender.</h3><p className="card-note">Compare the quote against your fair range and ask what is driving the difference.</p></div><Button variant="secondary" onClick={copySummary}>{copied ? <Check size={13} /> : <Copy size={13} />} {copied ? 'Copied' : 'Copy summary'}</Button></div><div className="negotiation-grid"><NegotiationItem label="Verdict" value={verdict.label} /><NegotiationItem label="Fair rate" value={`${formatPercent(result.rate.annualRate.min)}–${formatPercent(result.rate.annualRate.max)}`} /><NegotiationItem label="Safe amount" value={formatAmount(result.recommendedAmount.max, currency)} /><NegotiationItem label="Max EMI" value={formatAmount(result.recommendedEmi.max, currency)} /></div></section>
 
         <section className="chart-row">
           <div className="dash-card chart-panel"><CardTitle kicker="Tenure trade-off" title="More time costs more overall" note="Longer tenure supports a larger amount at the same safe EMI ceiling, but total repayment rises." /><div className="bar-chart">{result.tenureTradeoffs.map(option => <div className="bar-group" key={option.tenureMonths}><div className="bar-label"><span>{option.tenureMonths} months</span><strong>{formatAmount(option.totalRepayment, currency)} total</strong></div><ChartBar label="Safe amount" value={option.amount} max={Math.max(...result.tenureTradeoffs.map(item => item.totalRepayment))} color="blue" currency={currency} /><ChartBar label="Total repayment" value={option.totalRepayment} max={Math.max(...result.tenureTradeoffs.map(item => item.totalRepayment))} color="slate" currency={currency} /></div>)}</div></div>
