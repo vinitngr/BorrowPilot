@@ -12,6 +12,10 @@ BorrowPilot is an assessment tool for Indian borrowers. It turns a short set of 
 
 > This is an educational decision-support tool—not a bank, credit bureau, RBI service, or real-time lender quote.
 
+## Demo
+
+![BorrowPilot Demo](./assets/borrowpilot-demo.gif)
+
 ## What makes it different
 
 - **Two limits, clearly separated:** what a lender may sanction versus what a borrower can safely carry.
@@ -25,6 +29,16 @@ BorrowPilot is an assessment tool for Indian borrowers. It turns a short set of 
 
 ```text
 borrower inputs → profile normalization → EMI and affordability engine → decision result → negotiation view
+```
+
+```mermaid
+flowchart LR
+    A[Borrower inputs] --> B[Profile normalization]
+    B --> C[EMI and affordability engine]
+    C --> D{Decision result}
+    D --> E[Safe borrowing range]
+    D --> F[Stress check and confidence]
+    D --> G[Negotiation Card]
 ```
 
 The calculation engine is pure TypeScript and is kept separate from the React presentation layer. Changing the requested amount on the results screen reuses the same engine; it does not duplicate financial logic in the UI.
