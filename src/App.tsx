@@ -25,7 +25,7 @@ export function App() {
     <main className="px-5 pb-16 pt-8 sm:px-8 sm:pt-14">
       {screen === 'home' && <Home onStart={() => setScreen('questions')} />}
       {screen === 'questions' && <Questionnaire onComplete={complete} />}
-      {screen === 'results' && profile && result && <ResultsScreen profile={profile} result={result} onBack={() => setScreen('questions')} />}
+      {screen === 'results' && profile && result && <ResultsScreen profile={profile} result={result} onBack={() => setScreen('questions')} onAmountChange={amount => { const nextProfile = { ...profile, requestedAmount: amount }; setProfile(nextProfile); setResult(evaluateBorrower(nextProfile)) }} />}
     </main>
     <footer className="mx-auto w-full max-w-6xl px-5 pb-8 text-xs leading-5 text-[#8a9892] sm:px-8">Estimates are educational, not a bank approval or credit-bureau decision. Rates and fees vary by lender.</footer>
   </div>

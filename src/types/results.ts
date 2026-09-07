@@ -14,6 +14,13 @@ export interface LoanEstimate {
   tenureMonths: number
 }
 
+export interface TenureTradeoff {
+  tenureMonths: number
+  amount: number
+  monthlyEmi: number
+  totalRepayment: number
+}
+
 export interface RateEstimate {
   annualRate: MoneyRange
   estimatedApr: MoneyRange
@@ -44,5 +51,6 @@ export interface BorrowerResult {
   riskFactors: string[]
   productRecommendation: LoanProduct
   stressScenario: StressScenario
+  tenureTradeoffs: TenureTradeoff[]
   reasons: string[]
 }

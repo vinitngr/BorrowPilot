@@ -2,7 +2,7 @@ import { LOAN_RULES } from '../rules/loanRules'
 import type { BorrowerProfile } from '../types/borrower'
 import type { BorrowerResult, Confidence, MoneyRange, Verdict } from '../types/results'
 import { averageIncome, debtBurden, lenderEmiCapacity, lenderPrincipal, safeEmi, safePrincipal, stressIncome, stressSafeEmi } from './affordability'
-import { calculateEmi } from './emi'
+import { calculateEmi, principalForEmi, totalRepayment } from './emi'
 
 const round = (value: number) => Math.max(0, Math.round(value / 100) * 100)
 const range = (value: number, spread: number): MoneyRange => ({ min: round(value * (1 - spread)), max: round(value * (1 + spread)) })
@@ -58,6 +58,11 @@ export function evaluateBorrower(profile: BorrowerProfile): BorrowerResult {
   const likelyMonthly = calculateEmi(lenderAmount, rate.annualRate.max, tenure)
   const safeMonthly = calculateEmi(safeAmount, rate.annualRate.max, tenure)
   const safeRange = range(safeAmount, safeSpread)
+  const tenureTradeoffs = [36, 48, 60].map(tenureMonths => {
+    const eligibleTenure = Math.min(tenureMonths, Math.max(12, (LOAN_RULES.ageAtMaturity - profile.age) * 12))
+    const amount = principalForEmi(safeEmiValue, rate.annualRate.max, eligibleTenure)
+    return { tenureMonths: eligibleTenure, amount: round(amount), monthlyEmi: round(calculateEmi(amount, rate.annualRate.max, eligibleTenure)), totalRepayment: round(totalRepayment(amount, rate.annualRate.max, eligibleTenure)) }
+  })
   const reasons: string[] = []
   if (profile.existingEmis > 0) reasons.push(`Existing EMIs already use ${Math.round(debtBurden(profile) * 100)}% of average monthly income.`)
   if (profile.essentialExpenses === null) reasons.push('Essential expenses are unknown, so the safe estimate is intentionally less precise.')
@@ -87,6 +92,7 @@ export function evaluateBorrower(profile: BorrowerProfile): BorrowerResult {
     riskFactors,
     productRecommendation: profile.propertyValue && profile.propertyEncumbered === false && profile.incomeType === 'self-employed' ? 'secured-business-loan' : profile.loanProduct,
     stressScenario: { label: 'Income falls by 20%', monthlyIncome: round(stressIncome(profile)), safeEmi: round(stressEmi), remainingAfterEmi: round(stressIncome(profile) - profile.existingEmis - stressEmi), passes: stressEmi >= safeEmiValue * 0.75 },
+    tenureTradeoffs,
     reasons,
   }
 }

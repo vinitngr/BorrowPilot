@@ -4,12 +4,14 @@ import type { BorrowerResult } from '../../types/results'
 import { Badge } from '../ui/badge'
 import { Button } from '../ui/button'
 import { Card, CardContent, CardHeader } from '../ui/card'
+import { Input } from '../ui/input'
 import { formatPercent, formatRupees } from '../../lib/utils'
 
 interface ResultsScreenProps {
   profile: BorrowerProfile
   result: BorrowerResult
   onBack: () => void
+  onAmountChange: (amount: number) => void
 }
 
 const verdictCopy = {
@@ -18,7 +20,7 @@ const verdictCopy = {
   'dont-borrow': { label: 'Don’t borrow', icon: AlertTriangle, tone: 'bg-[#fde7e3] text-[#a33e32]' },
 } as const
 
-export function ResultsScreen({ profile, result, onBack }: ResultsScreenProps) {
+export function ResultsScreen({ profile, result, onBack, onAmountChange }: ResultsScreenProps) {
   const verdict = verdictCopy[result.verdict]
   const VerdictIcon = verdict.icon
   return (
@@ -39,6 +41,8 @@ export function ResultsScreen({ profile, result, onBack }: ResultsScreenProps) {
         </Card>
         <Card><CardHeader><p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#579184]">The number that matters</p><h2 className="font-serif text-3xl tracking-[-0.04em] text-[#213a35]">Use this amount, not just the lender’s maximum.</h2></CardHeader><CardContent><div className="rounded-2xl bg-[#edf6f1] p-5"><p className="text-sm text-[#5d766e]">Recommended safe borrowing</p><p className="mt-2 text-3xl font-bold tracking-[-0.03em] text-[#245c50]">{formatRupees(result.recommendedAmount.max)}</p><p className="mt-2 text-sm leading-5 text-[#5d766e]">Built from your expenses, existing EMIs, income resilience, and a stress check.</p></div></CardContent></Card>
       </section>
+
+      <Card className="mt-6"><CardHeader><p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#579184]">Try a different amount</p><h2 className="font-serif text-3xl tracking-[-0.04em] text-[#213a35]">See the decision update live.</h2></CardHeader><CardContent><div className="flex flex-col gap-4 sm:flex-row sm:items-end"><label className="block max-w-xs flex-1 text-sm font-medium text-[#426259]">Loan amount considered<Input type="number" min={0} step={1000} value={profile.requestedAmount} onChange={event => onAmountChange(Number(event.target.value))} className="mt-2" /></label><p className="max-w-lg text-sm leading-6 text-[#71817b]">This recalculates the verdict and recommendation using the same answers. You do not need to repeat the questionnaire.</p></div><div className="mt-7 overflow-x-auto"><div className="mb-3 text-sm font-semibold text-[#31584e]">Tenure trade-off at your safe EMI ceiling</div><div className="grid min-w-[520px] grid-cols-3 gap-3">{result.tenureTradeoffs.map(option => <div key={option.tenureMonths} className="rounded-xl bg-[#f3f7f3] p-4"><p className="text-xs text-[#78918a]">{option.tenureMonths} months</p><p className="mt-1 font-semibold text-[#2a5b4f]">{formatRupees(option.amount)}</p><p className="mt-1 text-xs text-[#71817b]">{formatRupees(option.totalRepayment)} total repayment</p></div>)}</div></div></CardContent></Card>
 
       <section className="grid gap-6 md:grid-cols-2">
         <Card><CardHeader><div className="flex items-center justify-between gap-3"><div><p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#579184]">Two different limits</p><h2 className="font-serif text-3xl tracking-[-0.04em] text-[#213a35]">Lender vs. safe</h2></div><Info className="text-[#7ea095]" size={20} /></div></CardHeader><CardContent className="space-y-5"><Metric label="Likely lender sanction" value={formatRupees(result.likelySanction.amount.max)} detail="What a lender may consider under an eligibility-style check" /><Metric label="Safe amount for you" value={formatRupees(result.safeBorrowing.amount.max)} detail="What your monthly budget can carry with more resilience" /><div className="h-3 overflow-hidden rounded-full bg-[#f1e9db]"><div className="h-full rounded-full bg-[#d49c4c]" style={{ width: `${Math.min(100, result.likelySanction.amount.max ? result.safeBorrowing.amount.max / result.likelySanction.amount.max * 100 : 0)}%` }} /></div></CardContent></Card>
