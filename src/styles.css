@@ -196,6 +196,17 @@ h1 { margin: 0; max-width: 690px; font-size: clamp(3.25rem, 6.2vw, 6.6rem); font
 .tradeoff span { color: var(--faint); font-size: 10px; }
 .tradeoff strong { display: block; margin-top: 6px; font-size: 14px; letter-spacing: -.03em; }
 .tradeoff small { display: block; margin-top: 4px; color: var(--muted); font-size: 9px; }
+.chart-card { grid-column: span 7; }
+.chart-wrap { width: 100%; height: 238px; margin-top: 16px; }
+.chart-legend { display: flex; gap: 17px; margin-top: 6px; color: var(--muted); font-size: 10px; }
+.chart-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.chart-legend i { display: inline-block; width: 7px; height: 7px; }
+.chart-amount { background: var(--blue); }
+.chart-total { background: #b9c4d2; }
+.chart-tooltip { min-width: 145px; border: 1px solid var(--line); background: #fff; box-shadow: 0 8px 20px rgba(31, 44, 66, .1); padding: 9px 10px; color: var(--ink); font-size: 10px; }
+.chart-tooltip strong { display: block; margin-bottom: 7px; font-size: 10px; }
+.chart-tooltip div { display: flex; align-items: center; gap: 6px; margin-top: 4px; color: var(--muted); }
+.chart-tooltip i { width: 6px; height: 6px; }
 .stress-box { display: flex; justify-content: space-between; align-items: end; gap: 12px; margin-top: 22px; border: 1px solid #f0d8ad; background: var(--amber-soft); padding: 13px; }
 .stress-box span { color: var(--amber); font-size: 10px; }
 .stress-box strong { display: block; margin-top: 5px; font-size: 19px; letter-spacing: -.05em; }
@@ -220,7 +231,7 @@ h1 { margin: 0; max-width: 690px; font-size: clamp(3.25rem, 6.2vw, 6.6rem); font
   .home-strip { gap: 20px; }
   .form-layout { grid-template-columns: 1fr; }
   .form-sidebar { display: none; }
-  .verdict-card, .safe-card, .wide-card, .medium-card { grid-column: span 12; }
+  .verdict-card, .safe-card, .wide-card, .medium-card, .chart-card { grid-column: span 12; }
   .metric-card { grid-column: span 6; }
 }
 
