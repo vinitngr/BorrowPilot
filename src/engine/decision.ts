@@ -70,7 +70,7 @@ export function evaluateBorrower(profile: BorrowerProfile): BorrowerResult {
   const riskFactors: string[] = []
   if (profile.incomeVolatility === 'high' || profile.incomeType === 'informal') riskFactors.push('Income volatility calls for a more conservative safe EMI.')
   if (profile.dependents >= 3) riskFactors.push('Several dependents reduce flexible monthly capacity.')
-  if (profile.propertyValue && profile.loanProduct === 'lap') positiveFactors.push('Unencumbered property may support a secured borrowing route.')
+  if (profile.propertyValue && profile.propertyEncumbered === false && (profile.loanProduct === 'lap' || profile.loanProduct === 'secured-business-loan')) positiveFactors.push('Unencumbered property may support a secured borrowing route.')
   return {
     verdict: decision.verdict,
     verdictExplanation: decision.explanation,
